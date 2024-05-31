@@ -1,8 +1,9 @@
-# React + Vite
+Projeto para o Curso Técnico de Segurança Cibernética no INMETRO
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Professor: Ewerton Madruga
 
-Currently, two official plugins are available:
+# Iniciar o projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Abra o terminal na pasta Anki-Inmetro
+- Ao executar pela primeira vez, use o comando "npm install"
+- Para levantar o projeto, use o comando "npm run dev" e acesse o projeto pela url indicada no terminal

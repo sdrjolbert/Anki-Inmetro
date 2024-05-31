@@ -7,6 +7,7 @@ import ReadDeck from './Components/Pages/ReadDeck';
 import HomePage from './Components/Pages/HomePage';
 import Login from './Components/Login/Login';
 import Deck from './Components/Deck/Deck';
+import './App.css';
 
 function App() {
   const [decks, setDecks] = useState([]);
@@ -24,9 +25,9 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="container">
       <BrowserRouter>
-        <main className="AppBody">
+        <main className="login form">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="login/*" element={<Login />} />
