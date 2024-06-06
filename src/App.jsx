@@ -1,4 +1,3 @@
-// App.jsx
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import CreateDeck from './Components/Pages/CreateDeck';
@@ -19,24 +18,76 @@ function App() {
   const handleAddCard = (deckName, card) => {
     setDecks((prevDecks) =>
       prevDecks.map((deck) =>
-        deck.name === deckName ? { ...deck, cards: [...deck.cards, card] } : deck
-      )
+        deck.name === deckName
+          ? { ...deck, cards: [...deck.cards, card] }
+          : deck,
+      ),
+    );
+  };
+
+  const handleDeleteCard = (deckName, cardId) => {
+    setDecks((prevDecks) =>
+      prevDecks.map((deck) =>
+        deck.name === deckName
+          ? { ...deck, cards: deck.cards.filter((card) => card.id !== cardId) }
+          : deck,
+      ),
+    );
+  };
+
+  const handleUpdateCard = (deckName, updatedCard) => {
+    setDecks((prevDecks) =>
+      prevDecks.map((deck) =>
+        deck.name === deckName
+          ? {
+              ...deck,
+              cards: deck.cards.map((card) =>
+                card.id === updatedCard.id ? updatedCard : card,
+              ),
+            }
+          : deck,
+      ),
+    );
+  };
+
+  const handleDeleteDeck = (deckName) => {
+    setDecks((prevDecks) => prevDecks.filter((deck) => deck.name !== deckName));
+  };
+
+  const handleUpdateDeck = (updatedDeck) => {
+    setDecks((prevDecks) =>
+      prevDecks.map((deck) =>
+        deck.name === updatedDeck.name ? updatedDeck : deck,
+      ),
     );
   };
 
   return (
-    <div className="container">
+    <div className="container flex-container">
       <BrowserRouter>
         <main className="login form">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="login/*" element={<Login />} />
-            <Route path="createdeck/*" element={<CreateDeck onCreate={handleCreateDeck} />} />
-            <Route path="addcard/*" element={<AddCard decks={decks} onAddCard={handleAddCard} />} />
+            <Route
+              path="createdeck/*"
+              element={<CreateDeck onCreate={handleCreateDeck} />}
+            />
+            <Route
+              path="addcard/*"
+              element={<AddCard decks={decks} onAddCard={handleAddCard} />}
+            />
             <Route path="readdeck/*" element={<ReadDeck decks={decks} />} />
           </Routes>
           {decks.map((deck, index) => (
-            <Deck key={index} deck={deck} />
+            <Deck
+              key={index}
+              deck={deck}
+              onDeleteCard={handleDeleteCard}
+              onUpdateCard={handleUpdateCard}
+              onDeleteDeck={handleDeleteDeck}
+              onUpdateDeck={handleUpdateDeck}
+            />
           ))}
         </main>
       </BrowserRouter>
