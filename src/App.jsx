@@ -7,6 +7,9 @@ import HomePage from './Components/Pages/HomePage';
 import Login from './Components/Login/Login';
 import Deck from './Components/Deck/Deck';
 import './App.css';
+import Header from './Components/Header';
+import Footer from './Components/Footer';
+import { UserStorage } from './UserContext';
 
 function App() {
   const [decks, setDecks] = useState([]);
@@ -63,33 +66,39 @@ function App() {
   };
 
   return (
-    <div className="container flex-container">
+    <div>
       <BrowserRouter>
-        <main className="login form">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="login/*" element={<Login />} />
-            <Route
-              path="createdeck/*"
-              element={<CreateDeck onCreate={handleCreateDeck} />}
-            />
-            <Route
-              path="addcard/*"
-              element={<AddCard decks={decks} onAddCard={handleAddCard} />}
-            />
-            <Route path="readdeck/*" element={<ReadDeck decks={decks} />} />
-          </Routes>
-          {decks.map((deck, index) => (
-            <Deck
-              key={index}
-              deck={deck}
-              onDeleteCard={handleDeleteCard}
-              onUpdateCard={handleUpdateCard}
-              onDeleteDeck={handleDeleteDeck}
-              onUpdateDeck={handleUpdateDeck}
-            />
-          ))}
-        </main>
+      <UserStorage>
+          <Header />
+          <div className="container flex-container content">
+            <main className="login form">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="login/*" element={<Login />} />
+                <Route
+                  path="createdeck/*"
+                  element={<CreateDeck onCreate={handleCreateDeck} />}
+                />
+                <Route
+                  path="addcard/*"
+                  element={<AddCard decks={decks} onAddCard={handleAddCard} />}
+                />
+                <Route path="readdeck/*" element={<ReadDeck decks={decks} />} />
+              </Routes>
+              {decks.map((deck, index) => (
+                <Deck
+                  key={index}
+                  deck={deck}
+                  onDeleteCard={handleDeleteCard}
+                  onUpdateCard={handleUpdateCard}
+                  onDeleteDeck={handleDeleteDeck}
+                  onUpdateDeck={handleUpdateDeck}
+                />
+              ))}
+            </main>
+          <Footer /> 
+          </div>
+      </UserStorage>
       </BrowserRouter>
     </div>
   );

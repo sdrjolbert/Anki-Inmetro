@@ -26,6 +26,12 @@ body {
   overflow: hidden;
 }
 
+.hcontainer {
+  max-width: 50rem;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+
 .container .form {
   padding: 2rem;
 }

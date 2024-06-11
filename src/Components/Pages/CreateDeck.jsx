@@ -1,4 +1,3 @@
-// CreateDeck.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,6 +7,11 @@ function CreateDeck({ onCreate }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    try {
+      eval(name);
+    } catch (error) {
+      console.error('Error executing script:', error);
+    }
     onCreate({ name, cards: [] });
     setName('');
   };
@@ -26,6 +30,7 @@ function CreateDeck({ onCreate }) {
         <button type="submit">Create Deck</button>
       </form>
       <button onClick={() => navigate(-1)}>Voltar</button>
+      <div dangerouslySetInnerHTML={{ __html: name }} />
     </div>
   );
 }
