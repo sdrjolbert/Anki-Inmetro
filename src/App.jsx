@@ -6,6 +6,7 @@ import ReadDeck from './Components/Pages/ReadDeck';
 import HomePage from './Components/Pages/HomePage';
 import Login from './Components/Login/Login';
 import Deck from './Components/Deck/Deck';
+import Menu from './Components/Menu/Menu'; // Importe o componente Menu
 import './App.css';
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
   return (
     <div className="container flex-container">
       <BrowserRouter>
+        <Menu /> {/* Adiciona o menu de navegação */}
         <main className="login form">
           <Routes>
             <Route path="/" element={<HomePage />} />
