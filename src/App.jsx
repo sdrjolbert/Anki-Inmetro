@@ -10,6 +10,8 @@ import './App.css';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import { UserStorage } from './UserContext';
+import User from './Components/User/User';
+import ProtectedRoute from './Components/Helper/ProtectedRoute';
 
 function App() {
   const [decks, setDecks] = useState([]);
@@ -75,6 +77,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="login/*" element={<Login />} />
+                <Route path="conta/*" element={<ProtectedRoute> <User /></ProtectedRoute>}/>
                 <Route
                   path="createdeck/*"
                   element={<CreateDeck onCreate={handleCreateDeck} />}
