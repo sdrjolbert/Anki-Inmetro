@@ -5,7 +5,6 @@ import AddCard from './Components/Pages/AddCard';
 import ReadDeck from './Components/Pages/ReadDeck';
 import HomePage from './Components/Pages/HomePage';
 import Login from './Components/Login/Login';
-import Deck from './Components/Deck/Deck';
 import Menu from './Components/Menu/Menu'; // Importe o componente Menu
 import './App.css';
 
@@ -79,18 +78,19 @@ function App() {
               path="addcard/*"
               element={<AddCard decks={decks} onAddCard={handleAddCard} />}
             />
-            <Route path="readdeck/*" element={<ReadDeck decks={decks} />} />
-          </Routes>
-          {decks.map((deck, index) => (
-            <Deck
-              key={index}
-              deck={deck}
-              onDeleteCard={handleDeleteCard}
-              onUpdateCard={handleUpdateCard}
-              onDeleteDeck={handleDeleteDeck}
-              onUpdateDeck={handleUpdateDeck}
+            <Route
+              path="readdeck/*"
+              element={
+                <ReadDeck
+                  decks={decks}
+                  onDeleteCard={handleDeleteCard}
+                  onUpdateCard={handleUpdateCard}
+                  onDeleteDeck={handleDeleteDeck}
+                  onUpdateDeck={handleUpdateDeck}
+                />
+              }
             />
-          ))}
+          </Routes>
         </main>
       </BrowserRouter>
     </div>

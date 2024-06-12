@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from '../Card/Card';
+import Deck from '../Deck/Deck';
 import '../../App.css';
 
-function ReadDeck({ decks }) {
+function ReadDeck({
+  decks,
+  onDeleteCard,
+  onUpdateCard,
+  onDeleteDeck,
+  onUpdateDeck,
+}) {
   const [selectedDeck, setSelectedDeck] = useState(null);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [showBack, setShowBack] = useState(false);
@@ -47,7 +54,7 @@ function ReadDeck({ decks }) {
     return (
       <div className="container">
         <select onChange={handleDeckChange}>
-          <option value="">Select a deck</option>
+          <option value="">Selecione um baralho</option>
           {decks.map((deck, index) => (
             <option key={index} value={deck.name}>
               {deck.name}
@@ -88,6 +95,14 @@ function ReadDeck({ decks }) {
         <button onClick={handleFlipCard}>Virar card</button>
       )}
       <button onClick={handleGoBack}>Voltar</button>
+      {/* Adicione a exibição do deck com as funções de manipulação */}
+      <Deck
+        deck={selectedDeck}
+        onDeleteCard={onDeleteCard}
+        onUpdateCard={onUpdateCard}
+        onDeleteDeck={onDeleteDeck}
+        onUpdateDeck={onUpdateDeck}
+      />
     </div>
   );
 }
