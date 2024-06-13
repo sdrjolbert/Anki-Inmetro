@@ -17,7 +17,7 @@ function Card({
       <div className={`flip-card-inner ${showBack ? 'show-back' : ''}`}>
         <div className="flip-card-front">
           <div className="card-header">
-            {isEditing ? 'Edit Front' : 'Front'}
+            {isEditing ? 'Editar Frente' : 'Frente'}
           </div>
           {isEditing ? (
             <textarea
@@ -30,7 +30,9 @@ function Card({
           )}
         </div>
         <div className="flip-card-back">
-          <div className="card-header">{isEditing ? 'Edit Back' : 'Back'}</div>
+          <div className="card-header">
+            {isEditing ? 'Editar Verso' : 'Verso'}
+          </div>
           {isEditing ? (
             <textarea
               className="card-content"

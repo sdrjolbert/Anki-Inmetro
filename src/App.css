@@ -94,12 +94,13 @@ body {
 
 /* Card styles */
 .card {
-  background: #fff;
+  background: #0F4C83; /* Azul igual ao background do app */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
   margin: 20px 0;
   transition: box-shadow 0.3s ease;
+  color: white; /* Cor do texto branca */
 }
 
 .card:hover {
@@ -110,11 +111,15 @@ body {
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 10px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }
 
 .card-content {
   font-size: 1rem;
-  color: #333;
+  color: white; /* Cor do texto branca */
+  padding-top: 30px; /* Adiciona padding para garantir que o conteúdo não sobreponha o cabeçalho */
 }
 
 /* Flexbox layout */
@@ -167,16 +172,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: white; /* Cor do texto branca */
 }
 
 .flip-card-front {
-  background-color: #fff;
-  color: black;
+  background-color: #0F4C83; /* Azul igual ao background do app */
 }
 
 .flip-card-back {
-  background-color: #009579;
-  color: white;
+  background-color: #009579; /* Mantém o verso verde */
   transform: rotateY(180deg);
 }
 
@@ -267,7 +271,7 @@ body {
   margin: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+ 	align-items: center;
 }
 
 .read-deck-container select,
