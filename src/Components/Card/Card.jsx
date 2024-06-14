@@ -1,22 +1,51 @@
 // Card.jsx
-import React from 'react';
 
-function Card({ card, showBack }) {
-  if (showBack) {
-    return (
-      <div>
-        <h3>Back</h3>
-        <p>{card.back}</p>
+import React, { useState } from 'react';
+import '../../App.css';
+
+function Card({
+  card,
+  isEditing,
+  showBack,
+  frontContent,
+  backContent,
+  setFrontContent,
+  setBackContent,
+}) {
+  return (
+    <div className="flip-card">
+      <div className={`flip-card-inner ${showBack ? 'show-back' : ''}`}>
+        <div className="flip-card-front">
+          <div className="card-header">
+            {isEditing ? 'Editar Frente' : 'Frente'}
+          </div>
+          {isEditing ? (
+            <textarea
+              className="card-content"
+              value={frontContent}
+              onChange={(e) => setFrontContent(e.target.value)}
+            />
+          ) : (
+            <div className="card-content">{card.front}</div>
+          )}
+        </div>
+        <div className="flip-card-back">
+          <div className="card-header">
+            {isEditing ? 'Editar Verso' : 'Verso'}
+          </div>
+          {isEditing ? (
+            <textarea
+              className="card-content"
+              value={backContent}
+              onChange={(e) => setBackContent(e.target.value)}
+            />
+          ) : (
+            <div className="card-content">{card.back}</div>
+          )}
+        </div>
       </div>
-    );
-  } else {
-    return (
-      <div>
-        <h3>Front</h3>
-        <p>{card.front}</p>
-      </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default Card;
