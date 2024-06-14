@@ -5,7 +5,7 @@ import AddCard from './Components/Pages/AddCard';
 import ReadDeck from './Components/Pages/ReadDeck';
 import HomePage from './Components/Pages/HomePage';
 import Login from './Components/Login/Login';
-import Deck from './Components/Deck/Deck';
+import Menu from './Components/Menu/Menu'; // Importe o componente Menu
 import './App.css';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
@@ -102,6 +102,7 @@ function App() {
                 />
               }
             />
+
           </Routes>
         </main>
           <Footer /> 
