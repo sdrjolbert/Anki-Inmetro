@@ -10,8 +10,10 @@ import './App.css';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import { UserStorage } from './UserContext';
+import Menu from './Components/Menu/Menu'; // Importe o componente Menu
 import User from './Components/User/User';
 import ProtectedRoute from './Components/Helper/ProtectedRoute';
+
 
 function App() {
   const [decks, setDecks] = useState([]);
@@ -73,6 +75,7 @@ function App() {
       <UserStorage>
           <Header />
           <div className="container flex-container content">
+          <Menu /> {/* Adiciona o menu de navegação */}
             <main className="login form">
               <Routes>
                 <Route path="/" element={<HomePage />} />
@@ -87,18 +90,20 @@ function App() {
                   element={<AddCard decks={decks} onAddCard={handleAddCard} />}
                 />
                 <Route path="readdeck/*" element={<ReadDeck decks={decks} />} />
-              </Routes>
-              {decks.map((deck, index) => (
-                <Deck
-                  key={index}
-                  deck={deck}
+                <Route
+              path="readdeck/*"
+              element={
+                <ReadDeck
+                  decks={decks}
                   onDeleteCard={handleDeleteCard}
                   onUpdateCard={handleUpdateCard}
                   onDeleteDeck={handleDeleteDeck}
                   onUpdateDeck={handleUpdateDeck}
                 />
-              ))}
-            </main>
+              }
+            />
+          </Routes>
+        </main>
           <Footer /> 
           </div>
       </UserStorage>
