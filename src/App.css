@@ -350,3 +350,22 @@ body {
 .next-card-button:hover {
   background-color: #e0a800;
 }
+
+/* Progress styles */
+.progress {
+  margin-bottom: 20px;
+  font-size: 1rem;
+  color: #333;
+  text-align: center;
+}
+
+/* Final message styles */
+.final-message {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.final-message p {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}

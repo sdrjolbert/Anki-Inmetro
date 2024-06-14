@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from '../Card/Card';
 import '../../App.css';
@@ -9,10 +9,16 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
   const [showBack, setShowBack] = useState(false);
   const [readingStarted, setReadingStarted] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [cardContent, setCardContent] = useState('');
   const [frontContent, setFrontContent] = useState('');
   const [backContent, setBackContent] = useState('');
+  const [reviewedCards, setReviewedCards] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (selectedDeck) {
+      setReviewedCards(new Array(selectedDeck.cards.length).fill(false));
+    }
+  }, [selectedDeck]);
 
   const handleDeckChange = (event) => {
     const deckName = event.target.value;
@@ -21,6 +27,7 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
     setCurrentCardIndex(0);
     setShowBack(false);
     setReadingStarted(false);
+    setReviewedCards(new Array(deck.cards.length).fill(false));
   };
 
   const handleStartReading = () => {
@@ -35,6 +42,11 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
   };
 
   const handleNextCard = () => {
+    setReviewedCards((prev) => {
+      const newReviewed = [...prev];
+      newReviewed[currentCardIndex] = true;
+      return newReviewed;
+    });
     const nextIndex = currentCardIndex + 1;
     if (nextIndex < selectedDeck.cards.length) {
       setCurrentCardIndex(nextIndex);
@@ -42,17 +54,12 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
       const card = selectedDeck.cards[nextIndex];
       setFrontContent(card.front);
       setBackContent(card.back);
+    } else {
+      setShowBack(false);
     }
   };
 
   const handleReturn = () => {
-    setSelectedDeck(null);
-    setCurrentCardIndex(0);
-    setShowBack(false);
-    setReadingStarted(false);
-  };
-
-  const handleGoBack = () => {
     setSelectedDeck(null);
     setCurrentCardIndex(0);
     setShowBack(false);
@@ -81,8 +88,11 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
     handleNextCard();
   };
 
-  const handleCardContentChange = (event) => {
-    setCardContent(event.target.value);
+  const handleReadAgain = () => {
+    setCurrentCardIndex(0);
+    setReviewedCards(new Array(selectedDeck.cards.length).fill(false));
+    setShowBack(false);
+    setReadingStarted(true);
   };
 
   if (!selectedDeck) {
@@ -96,7 +106,7 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
             </option>
           ))}
         </select>
-        <button onClick={handleGoBack}>Voltar</button>
+        <button onClick={handleReturn}>Voltar</button>
       </div>
     );
   }
@@ -106,22 +116,38 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
       <div className="container read-deck-container">
         <h2>{selectedDeck.name}</h2>
         <button onClick={handleStartReading}>Iniciar leitura</button>
-        <button onClick={handleGoBack}>Voltar</button>
+        <button onClick={handleReturn}>Voltar</button>
       </div>
     );
   }
 
   if (currentCardIndex >= selectedDeck.cards.length) {
+    const reviewedCount = reviewedCards.filter(Boolean).length;
     return (
       <div className="container read-deck-container">
         <h2>Deck finalizado</h2>
-        <button onClick={handleReturn}>Retornar</button>
+        <p>
+          Você revisou {reviewedCount} de {selectedDeck.cards.length} cards.
+        </p>
+        <div className="button-group">
+          <button className="next-card-button" onClick={handleReadAgain}>
+            Ler novamente
+          </button>
+          <button className="next-card-button" onClick={handleReturn}>
+            Selecionar outro deck
+          </button>
+        </div>
       </div>
     );
   }
 
+  const reviewedCount = reviewedCards.filter(Boolean).length;
+
   return (
     <div className="container read-deck-container">
+      <div className="progress">
+        Revisados: {reviewedCount}/{selectedDeck.cards.length}
+      </div>
       <Card
         card={selectedDeck.cards[currentCardIndex]}
         isEditing={editMode}
