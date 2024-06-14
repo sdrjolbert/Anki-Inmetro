@@ -7,6 +7,13 @@ import HomePage from './Components/Pages/HomePage';
 import Login from './Components/Login/Login';
 import Menu from './Components/Menu/Menu'; // Importe o componente Menu
 import './App.css';
+import Header from './Components/Header';
+import Footer from './Components/Footer';
+import { UserStorage } from './UserContext';
+import Menu from './Components/Menu/Menu'; // Importe o componente Menu
+import User from './Components/User/User';
+import ProtectedRoute from './Components/Helper/ProtectedRoute';
+
 
 function App() {
   const [decks, setDecks] = useState([]);
@@ -63,22 +70,27 @@ function App() {
   };
 
   return (
-    <div className="container flex-container">
+    <div>
       <BrowserRouter>
-        <Menu /> {/* Adiciona o menu de navegação */}
-        <main className="login form">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="login/*" element={<Login />} />
-            <Route
-              path="createdeck/*"
-              element={<CreateDeck onCreate={handleCreateDeck} />}
-            />
-            <Route
-              path="addcard/*"
-              element={<AddCard decks={decks} onAddCard={handleAddCard} />}
-            />
-            <Route
+      <UserStorage>
+          <Header />
+          <div className="container flex-container content">
+          <Menu /> {/* Adiciona o menu de navegação */}
+            <main className="login form">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="login/*" element={<Login />} />
+                <Route path="conta/*" element={<ProtectedRoute> <User /></ProtectedRoute>}/>
+                <Route
+                  path="createdeck/*"
+                  element={<CreateDeck onCreate={handleCreateDeck} />}
+                />
+                <Route
+                  path="addcard/*"
+                  element={<AddCard decks={decks} onAddCard={handleAddCard} />}
+                />
+                <Route path="readdeck/*" element={<ReadDeck decks={decks} />} />
+                <Route
               path="readdeck/*"
               element={
                 <ReadDeck
@@ -90,8 +102,12 @@ function App() {
                 />
               }
             />
+
           </Routes>
         </main>
+          <Footer /> 
+          </div>
+      </UserStorage>
       </BrowserRouter>
     </div>
   );

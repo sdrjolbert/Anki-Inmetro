@@ -8,10 +8,7 @@ const HomePage = () => {
         <section>
             <h1>Bem vindo ao Anki-Inmetro!</h1>
 
-
-            <Link to="/login">
-            <input type="button" defaultValue={"Login"} />
-            </Link>
+            {/* Login está no Header.jsx! */}
 
             <Link to="/createdeck">
                 <input type="button" value="Criar Deck" />

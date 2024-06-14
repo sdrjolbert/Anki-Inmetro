@@ -106,8 +106,9 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
             </option>
           ))}
         </select>
-        <button onClick={handleReturn}>Voltar</button>
-      </div>
+        <button onClick={() => navigate(-1)}>Voltar</button>
+        </div>
+
     );
   }
 
@@ -116,8 +117,9 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
       <div className="container read-deck-container">
         <h2>{selectedDeck.name}</h2>
         <button onClick={handleStartReading}>Iniciar leitura</button>
-        <button onClick={handleReturn}>Voltar</button>
-      </div>
+        <button onClick={() => navigate(-1)}>Voltar</button>
+        </div>
+
     );
   }
 
