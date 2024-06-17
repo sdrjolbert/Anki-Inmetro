@@ -10,7 +10,6 @@ import './App.css';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import { UserStorage } from './UserContext';
-import Menu from './Components/Menu/Menu'; // Importe o componente Menu
 import User from './Components/User/User';
 import ProtectedRoute from './Components/Helper/ProtectedRoute';
 
