@@ -84,8 +84,14 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
   };
 
   const handleDeleteCard = () => {
+    const updatedCards = selectedDeck.cards.filter(
+      (_, index) => index !== currentCardIndex,
+    );
     onDeleteCard(selectedDeck.name, selectedDeck.cards[currentCardIndex].id);
-    handleNextCard();
+    setSelectedDeck({ ...selectedDeck, cards: updatedCards });
+    if (currentCardIndex > 0) {
+      setCurrentCardIndex(currentCardIndex - 1);
+    }
   };
 
   const handleReadAgain = () => {
@@ -107,8 +113,7 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
           ))}
         </select>
         <button onClick={() => navigate(-1)}>Voltar</button>
-        </div>
-
+      </div>
     );
   }
 
@@ -118,8 +123,7 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
         <h2>{selectedDeck.name}</h2>
         <button onClick={handleStartReading}>Iniciar leitura</button>
         <button onClick={() => navigate(-1)}>Voltar</button>
-        </div>
-
+      </div>
     );
   }
 
