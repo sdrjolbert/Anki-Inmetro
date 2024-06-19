@@ -30,7 +30,6 @@ function CreateDeck({ onCreate }) {
         <button type="submit">Create Deck</button>
       </form>
       <button onClick={() => navigate(-1)}>Voltar</button>
-      <div dangerouslySetInnerHTML={{ __html: name }} />
     </div>
   );
 }

@@ -71,42 +71,42 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-      <UserStorage>
-          <Header />
-          <div className="container flex-container content">
-          <Menu /> {/* Adiciona o menu de navegação */}
-            <main className="login form">
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="login/*" element={<Login />} />
-                <Route path="conta/*" element={<ProtectedRoute> <User /></ProtectedRoute>}/>
-                <Route
-                  path="createdeck/*"
-                  element={<CreateDeck onCreate={handleCreateDeck} />}
-                />
-                <Route
-                  path="addcard/*"
-                  element={<AddCard decks={decks} onAddCard={handleAddCard} />}
-                />
-                <Route path="readdeck/*" element={<ReadDeck decks={decks} />} />
-                <Route
-              path="readdeck/*"
-              element={
-                <ReadDeck
-                  decks={decks}
-                  onDeleteCard={handleDeleteCard}
-                  onUpdateCard={handleUpdateCard}
-                  onDeleteDeck={handleDeleteDeck}
-                  onUpdateDeck={handleUpdateDeck}
-                />
-              }
-            />
+        <UserStorage>
+            <Header />
+            <div className="container flex-container content">
+            <Menu /> {/* Adiciona o menu de navegação */}
+              <main className="login form">
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="login/*" element={<Login />} />
+                  <Route path="conta/*" element={<ProtectedRoute> <User /></ProtectedRoute>}/>
+                  <Route
+                    path="createdeck/*"
+                    element={<CreateDeck onCreate={handleCreateDeck} />}
+                  />
+                  <Route
+                    path="addcard/*"
+                    element={<AddCard decks={decks} onAddCard={handleAddCard} />}
+                  />
+                  <Route path="readdeck/*" element={<ReadDeck decks={decks} />} />
+                  <Route
+                path="readdeck/*"
+                element={
+                  <ReadDeck
+                    decks={decks}
+                    onDeleteCard={handleDeleteCard}
+                    onUpdateCard={handleUpdateCard}
+                    onDeleteDeck={handleDeleteDeck}
+                    onUpdateDeck={handleUpdateDeck}
+                  />
+                }
+              />
 
-          </Routes>
-        </main>
-          <Footer /> 
-          </div>
-      </UserStorage>
+            </Routes>
+          </main>
+            <Footer /> 
+            </div>
+        </UserStorage>
       </BrowserRouter>
     </div>
   );
