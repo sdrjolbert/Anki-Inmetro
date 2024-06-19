@@ -88,7 +88,6 @@ function App() {
                     path="addcard/*"
                     element={<AddCard decks={decks} onAddCard={handleAddCard} />}
                   />
-                  <Route path="readdeck/*" element={<ReadDeck decks={decks} />} />
                   <Route
                 path="readdeck/*"
                 element={
