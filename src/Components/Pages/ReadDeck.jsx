@@ -55,6 +55,7 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
       setFrontContent(card.front);
       setBackContent(card.back);
     } else {
+      setCurrentCardIndex(nextIndex); // Atualizar para além do último card para indicar finalização
       setShowBack(false);
     }
   };
