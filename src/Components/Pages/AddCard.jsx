@@ -1,18 +1,33 @@
-// AddCard.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function AddCard({ decks, onAddCard }) {
-  const [deck, setDeck] = useState(decks[0]?.name || '');  const [front, setFront] = useState('');
+  const [deck, setDeck] = useState(decks[0]?.name || '');
+  const [front, setFront] = useState('');
   const [back, setBack] = useState('');
   const navigate = useNavigate();
 
+  const handleFrontChange = (event) => {
+    const { value } = event.target;
+    if (value.length <= 150) {
+      setFront(value);
+    }
+  };
+
+  const handleBackChange = (event) => {
+    const { value } = event.target;
+    if (value.length <= 150) {
+      setBack(value);
+    }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onAddCard(deck, { front, back });
-    setFront('');
-    setBack('');
+    if (front && back) {
+      onAddCard(deck, { front, back });
+      setFront('');
+      setBack('');
+    }
   };
 
   return (
@@ -33,7 +48,9 @@ function AddCard({ decks, onAddCard }) {
           <input
             type="text"
             value={front}
-            onChange={(e) => setFront(e.target.value)}
+            onChange={handleFrontChange}
+            placeholder="Frente do Card (máx. 150 caracteres)"
+            required
           />
         </label>
         <label>
@@ -41,7 +58,9 @@ function AddCard({ decks, onAddCard }) {
           <input
             type="text"
             value={back}
-            onChange={(e) => setBack(e.target.value)}
+            onChange={handleBackChange}
+            placeholder="Verso do Card (máx. 150 caracteres)"
+            required
           />
         </label>
         <button type="submit">Add Card</button>

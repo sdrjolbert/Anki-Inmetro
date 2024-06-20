@@ -55,6 +55,7 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
       setFrontContent(card.front);
       setBackContent(card.back);
     } else {
+      setCurrentCardIndex(nextIndex); // Atualizar para além do último card para indicar finalização
       setShowBack(false);
     }
   };
@@ -84,8 +85,14 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
   };
 
   const handleDeleteCard = () => {
+    const updatedCards = selectedDeck.cards.filter(
+      (_, index) => index !== currentCardIndex,
+    );
     onDeleteCard(selectedDeck.name, selectedDeck.cards[currentCardIndex].id);
-    handleNextCard();
+    setSelectedDeck({ ...selectedDeck, cards: updatedCards });
+    if (currentCardIndex > 0) {
+      setCurrentCardIndex(currentCardIndex - 1);
+    }
   };
 
   const handleReadAgain = () => {
@@ -93,6 +100,20 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
     setReviewedCards(new Array(selectedDeck.cards.length).fill(false));
     setShowBack(false);
     setReadingStarted(true);
+  };
+
+  const handleFrontContentChange = (event) => {
+    const { value } = event.target;
+    if (value.length <= 150) {
+      setFrontContent(value);
+    }
+  };
+
+  const handleBackContentChange = (event) => {
+    const { value } = event.target;
+    if (value.length <= 150) {
+      setBackContent(value);
+    }
   };
 
   if (!selectedDeck) {
@@ -107,8 +128,7 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
           ))}
         </select>
         <button onClick={() => navigate(-1)}>Voltar</button>
-        </div>
-
+      </div>
     );
   }
 
@@ -118,8 +138,7 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
         <h2>{selectedDeck.name}</h2>
         <button onClick={handleStartReading}>Iniciar leitura</button>
         <button onClick={() => navigate(-1)}>Voltar</button>
-        </div>
-
+      </div>
     );
   }
 
@@ -158,6 +177,8 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
         backContent={backContent}
         setFrontContent={setFrontContent}
         setBackContent={setBackContent}
+        handleFrontContentChange={handleFrontContentChange}
+        handleBackContentChange={handleBackContentChange}
       />
       <div className="button-group">
         {editMode ? (
