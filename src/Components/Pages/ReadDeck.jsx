@@ -102,6 +102,20 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
     setReadingStarted(true);
   };
 
+  const handleFrontContentChange = (event) => {
+    const { value } = event.target;
+    if (value.length <= 150) {
+      setFrontContent(value);
+    }
+  };
+
+  const handleBackContentChange = (event) => {
+    const { value } = event.target;
+    if (value.length <= 150) {
+      setBackContent(value);
+    }
+  };
+
   if (!selectedDeck) {
     return (
       <div className="container read-deck-container">
@@ -163,6 +177,8 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
         backContent={backContent}
         setFrontContent={setFrontContent}
         setBackContent={setBackContent}
+        handleFrontContentChange={handleFrontContentChange}
+        handleBackContentChange={handleBackContentChange}
       />
       <div className="button-group">
         {editMode ? (

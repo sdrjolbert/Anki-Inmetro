@@ -5,15 +5,19 @@ function CreateDeck({ onCreate }) {
   const [name, setName] = useState('');
   const navigate = useNavigate();
 
+  const handleNameChange = (event) => {
+    const { value } = event.target;
+    if (value.length <= 15) {
+      setName(value);
+    }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    try {
-      eval(name);
-    } catch (error) {
-      console.error('Error executing script:', error);
+    if (name) {
+      onCreate({ name, cards: [] });
+      setName('');
     }
-    onCreate({ name, cards: [] });
-    setName('');
   };
 
   return (
@@ -24,7 +28,9 @@ function CreateDeck({ onCreate }) {
           <input
             type="text"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={handleNameChange}
+            placeholder="Nome do Deck (máx. 15 caracteres)"
+            required
           />
         </label>
         <button type="submit">Create Deck</button>
