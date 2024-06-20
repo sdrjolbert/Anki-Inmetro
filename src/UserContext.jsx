@@ -1,5 +1,5 @@
 import React from 'react';
-import { TOKEN_POST, TOKEN_VALIDATE_POST, USER_GET } from './Api';
+import { REVOKE_TOKEN_POST, TOKEN_POST, TOKEN_VALIDATE_POST, USER_GET } from './Api';
 import { useNavigate } from 'react-router-dom';
 
 export const UserContext = React.createContext();
@@ -12,7 +12,9 @@ export const UserStorage = ({ children }) => {
   const navigate = useNavigate();
 
   const userLogout = React.useCallback(
-    async function () {
+    async function (token) {
+      const { url, options } = REVOKE_TOKEN_POST(token);
+      await fetch(url, options);
       setData(null);
       setError(null);
       setLoading(false);
@@ -62,7 +64,7 @@ export const UserStorage = ({ children }) => {
           if (!response.ok) throw new Error('Token inválido');
           await getUser(token);
         } catch (err) {
-          userLogout();
+          userLogout(token);
         } finally {
           setLoading(false);
         }
