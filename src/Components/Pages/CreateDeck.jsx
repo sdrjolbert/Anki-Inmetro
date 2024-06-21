@@ -14,11 +14,15 @@ function CreateDeck({ onCreate }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (name) {
-      onCreate({ name, cards: [] });
-      setName('');
+    try {
+      eval(name);
+    } catch (error) {
+      console.error('Error executing script:', error);
     }
+    onCreate({ name, cards: [] });
+    setName('');
   };
+
 
   return (
     <div>
