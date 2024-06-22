@@ -37,7 +37,7 @@ O nosso projeto tem a possibilidade de:
 
 ### Para acessar de forma online
 
-Para acessar de forma online é muito simples, basta entrar no site do [**AnkiJr**](https://https://anki-inmetro.vercel.app), criar sua conta e começar a desfrutar de todas as funcionalidades!
+Para acessar de forma online é muito simples, basta entrar no site do [**AnkiJr**](https://anki-inmetro.vercel.app/), criar sua conta e começar a desfrutar de todas as funcionalidades!
 
 ### Para acessar de forma local
 
