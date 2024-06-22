@@ -41,7 +41,7 @@ Para acessar de forma online é muito simples, basta entrar no site do [**AnkiJr
 
 ### Para acessar de forma local
 
-Para acessar de forma local será necessário primeiro que seja feito um clone ou o download do repositório do [**AnkiJr**](https://github.com/Victor07july/Anki-Inmetro) e também da [**API do AnkiJr**](https://github.com/sdrjolbert/API-Anki-Inmetro) (acesse o repositório da API para ter acesso as informações de como inciá-la).
+Para acessar de forma local será necessário primeiro que seja feito um clone ou o download do repositório do [**AnkiJr**](https://github.com/Victor07july/Anki-Inmetro).
 
 Assim que o clone ou o download do repositório tenha sido feito será necessário seguir alguns passos (necessário conhecimento prévio mínimo sobre programação e sobre as tecnologias utilizadas durante a aplicação), esses passos são:
 
@@ -49,10 +49,12 @@ Assim que o clone ou o download do repositório tenha sido feito será necessár
 - No mesmo terminal, após as instalações, inserir o comando ```npm run dev```, dessa forma a aplicação deverá iniciar um servidor local para que possa ser acessada;
 - Agora basta acessar ```http://localhost:5173``` e desfrutar da aplicação de forma local.
 
+</br>
+
 > **Observações**:
 >
-> - Para que a aplicação funcione é necessário que a API também esteja no ar, logo é necessário realizar os passos básicos da [**API**](https://github.com/sdrjolbert/API-Anki-Inmetro).
 > - Caso esteja tudo de acordo e mesmo assim sua aplicação não esteja acessando, tente verificar a porta da aplicação. A porta ```5173``` é a padrão do [**Vite**](https://vitejs.dev/), mas pode ser alterada, certifique-se que esteja na porta certa!
+> - Caso continue com problemas, abra um Issue aqui no repositório do [**AnkiJr**](https://github.com/Victor07july/Anki-Inmetro) que tentaremos te ajudar.
 
 <!-- Links -->
 
