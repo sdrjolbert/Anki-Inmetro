@@ -12,6 +12,7 @@ import Footer from './Components/Footer';
 import { UserStorage } from './UserContext';
 import User from './Components/User/User';
 import ProtectedRoute from './Components/Helper/ProtectedRoute';
+import StatisticsPage from './Components/Pages/StatisticsPage';
 
 
 function App() {
@@ -100,6 +101,7 @@ function App() {
                   />
                 }
               />
+              <Route path="/statistics" element={<StatisticsPage />} />
 
             </Routes>
           </main>

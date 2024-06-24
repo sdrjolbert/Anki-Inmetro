@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from '../Card/Card';
 import '../../App.css';
+import { UserContext } from '../../UserContext';
+import { useContext } from 'react';
 
 function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
   const [selectedDeck, setSelectedDeck] = useState(null);
@@ -12,6 +14,7 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
   const [frontContent, setFrontContent] = useState('');
   const [backContent, setBackContent] = useState('');
   const [reviewedCards, setReviewedCards] = useState([]);
+  const { incrementCardsReadCount } = useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,6 +50,7 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
       newReviewed[currentCardIndex] = true;
       return newReviewed;
     });
+    incrementCardsReadCount(); // Incrementa o contador de cartas lidas
     const nextIndex = currentCardIndex + 1;
     if (nextIndex < selectedDeck.cards.length) {
       setCurrentCardIndex(nextIndex);

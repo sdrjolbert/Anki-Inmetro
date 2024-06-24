@@ -21,6 +21,10 @@ const HomePage = () => {
             <Link to="/readdeck">
             <input type="button" value="Ler Deck" />
             </Link>
+
+            <Link to="/statistics">
+            <input type="button" value="Estatísticas" />
+            </Link>
         </section>
     )
 

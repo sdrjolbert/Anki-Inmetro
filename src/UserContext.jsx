@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { REVOKE_TOKEN_POST, TOKEN_POST, TOKEN_VALIDATE_POST, USER_GET } from './Api';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,7 +9,14 @@ export const UserStorage = ({ children }) => {
   const [login, setLogin] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
+  const [cardsReadCount, setCardsReadCount] = useState(0);
+
   const navigate = useNavigate();
+
+  const incrementCardsReadCount = () => {
+    setCardsReadCount((prevCount) => prevCount + 1);
+  };
+  
 
   const userLogout = React.useCallback(
     async function (token) {
@@ -77,7 +84,7 @@ export const UserStorage = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ userLogin, userLogout, data, error, loading, login }}
+      value={{ userLogin, userLogout, data, error, loading, login, cardsReadCount, incrementCardsReadCount }}
     >
       {children}
     </UserContext.Provider>
