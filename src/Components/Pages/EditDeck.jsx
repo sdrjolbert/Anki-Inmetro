@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from '../Card/Card';
 import '../../App.css';
 import { UserContext } from '../../UserContext';
+import { useContext } from 'react';
 
-function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
+function EditDeck({ decks, onDeleteCard, onUpdateCard }) {
   const [selectedDeck, setSelectedDeck] = useState(null);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [showBack, setShowBack] = useState(false);
@@ -14,11 +15,6 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
   const [backContent, setBackContent] = useState('');
   const [reviewedCards, setReviewedCards] = useState([]);
   const { incrementCardsReadCount } = useContext(UserContext);
-  const { incrementEasyCardsCount } = useContext(UserContext);
-  const { incrementDifficultCardsCount } = useContext(UserContext)
-  // const [easyCardsCount, setEasyCount] = useState(0);
-  // const [difficultCount, setDifficultCount] = useState(0);
-  const [showOptions, setShowOptions] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -102,7 +98,6 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
       setCurrentCardIndex(currentCardIndex - 1);
     }
   };
-  
 
   const handleReadAgain = () => {
     setCurrentCardIndex(0);
@@ -171,34 +166,6 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
     );
   }
 
-  const handleEasyCard = () => {
-    incrementEasyCardsCount()
-    setShowBack(false);
-    setShowOptions(false);
-    handleNextCard(); // Move para o próximo card
-  };
-
-  const handleDifficultCard = () => {
-    incrementDifficultCardsCount()
-    setShowBack(false);
-    setShowOptions(false);
-    handleNextCard(); // Move para o próximo card
-  };
-
-
-  const handleShowCard = () => {
-    setShowBack(true);
-    setShowOptions(true);
-  };
-
-  const handleRestart = () => {
-    // setCurrentCardIndex(0);
-    setShowBack(false);
-    setShowOptions(false);
-    // Resetar contadores se necessário
-  };
-
-
   const reviewedCount = reviewedCards.filter(Boolean).length;
 
   return (
@@ -218,27 +185,27 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
         handleBackContentChange={handleBackContentChange}
       />
       <div className="button-group">
-      {!showOptions && (
-          <button className="show-card-button" onClick={handleShowCard}>
-            Mostrar card
+        {editMode ? (
+          <button className="save-button" onClick={handleSaveCard}>
+            Salvar
+          </button>
+        ) : (
+          <button className="edit-button" onClick={handleEditCard}>
+            Editar
           </button>
         )}
-        {showOptions && (
-          <>
-            <button className="again-button" onClick={handleRestart}>
-              Novamente
-            </button>
-            <button className="easy-button" onClick={handleEasyCard}>
-              Fácil
-            </button>
-            <button className="difficult-button" onClick={handleDifficultCard}>
-              Difícil
-            </button>
-          </>
-        )}
+        <button className="flip-button" onClick={handleFlipCard}>
+          {showBack ? 'Mostrar frente' : 'Mostrar verso'}
+        </button>
+        <button className="delete-button" onClick={handleDeleteCard}>
+          Excluir
+        </button>
+        <button className="next-card-button" onClick={handleNextCard}>
+          Próximo card
+        </button>
       </div>
     </div>
   );
 }
 
-export default ReadDeck;
+export default EditDeck;

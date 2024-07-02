@@ -7,9 +7,6 @@ function Menu() {
     <nav className="menu">
       <ul>
         <li>
-          <Link to="/">Início</Link>
-        </li>
-        <li>
           <Link to="/createdeck">Criar Baralho</Link>
         </li>
         <li>

@@ -10,11 +10,24 @@ export const UserStorage = ({ children }) => {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
   const [cardsReadCount, setCardsReadCount] = useState(0);
+  const [easyCardsCount, setEasyCardsCount] = useState(0);
+  const [difficultCardsCount, setDifficultCardsCount] = useState(0);
 
   const navigate = useNavigate();
 
   const incrementCardsReadCount = () => {
     setCardsReadCount((prevCount) => prevCount + 1);
+  };
+
+  
+  // Função para incrementar a contagem de cartas fáceis
+  const incrementEasyCardsCount = () => {
+    setEasyCardsCount(prevCount => prevCount + 1);
+  };
+
+  // Função para incrementar a contagem de cartas difíceis
+  const incrementDifficultCardsCount = () => {
+    setDifficultCardsCount(prevCount => prevCount + 1);
   };
   
 
@@ -84,7 +97,7 @@ export const UserStorage = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ userLogin, userLogout, data, error, loading, login, cardsReadCount, incrementCardsReadCount }}
+      value={{ userLogin, userLogout, data, error, loading, login, cardsReadCount, easyCardsCount, difficultCardsCount, incrementCardsReadCount, incrementEasyCardsCount, incrementDifficultCardsCount }}
     >
       {children}
     </UserContext.Provider>

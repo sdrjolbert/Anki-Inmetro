@@ -11,6 +11,7 @@ import Header from './Components/Header';
 import Footer from './Components/Footer';
 import { UserStorage } from './UserContext';
 import User from './Components/User/User';
+import EditDeck from './Components/Pages/EditDeck';
 import ProtectedRoute from './Components/Helper/ProtectedRoute';
 import StatisticsPage from './Components/Pages/StatisticsPage';
 
@@ -80,6 +81,7 @@ function App() {
                 <Routes>
                   <Route path="/" element={<HomePage />} />
                   <Route path="login/*" element={<Login />} />
+                  <Route path="editdeck/*" element={<EditDeck />} />
                   <Route path="conta/*" element={<ProtectedRoute> <User /></ProtectedRoute>}/>
                   <Route
                     path="createdeck/*"
