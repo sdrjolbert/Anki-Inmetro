@@ -22,7 +22,7 @@ const HomePage = () => {
             <input type="button" value="Ler Deck" />
             </Link>
 
-            <Link to="/readdeck">
+            <Link to="/editdeck">
             <input type="button" value="Editar Deck" />
             </Link>
 

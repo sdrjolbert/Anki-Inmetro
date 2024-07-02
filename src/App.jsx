@@ -81,7 +81,15 @@ function App() {
                 <Routes>
                   <Route path="/" element={<HomePage />} />
                   <Route path="login/*" element={<Login />} />
-                  <Route path="editdeck/*" element={<EditDeck />} />
+                  <Route 
+                  path="editdeck/*" 
+                  element={<EditDeck 
+                    decks={decks}
+                    onDeleteCard={handleDeleteCard}
+                    onUpdateCard={handleUpdateCard}
+                    onDeleteDeck={handleDeleteDeck}
+                    onUpdateDeck={handleUpdateDeck}
+                  />} />
                   <Route path="conta/*" element={<ProtectedRoute> <User /></ProtectedRoute>}/>
                   <Route
                     path="createdeck/*"
