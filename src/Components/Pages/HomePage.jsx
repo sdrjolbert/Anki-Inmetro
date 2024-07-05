@@ -34,6 +34,10 @@ const HomePage = () => {
             <Link to="/import-apkg">
             <input type="button" value="Importar .apkg" />
             </Link>
+
+            <Link to="/export-apkg">
+            <input type="button" value="Exportar .apkg" />
+            </Link>
         </section>
     )
 

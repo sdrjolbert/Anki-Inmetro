@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Card from '../Card/Card';
 import '../../App.css';
 import { UserContext } from '../../UserContext';
+import axios from 'axios';
 
 function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
   const [selectedDeck, setSelectedDeck] = useState(null);
@@ -20,6 +21,34 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
   // const [difficultCount, setDifficultCount] = useState(0);
   const [showOptions, setShowOptions] = useState(false);
   const navigate = useNavigate();
+
+  const [deck, setDeck] = useState('');
+  const [deckList, setDeckList] = useState([]);
+  const token = window.localStorage.getItem("token");
+   const [message, setMessage] = useState(
+    "Nada ainda, selecione o deck e escolha a frente e o verso do card!"
+  );
+  const [isLoading, setLoading] = useState();
+
+  useEffect(() => {
+    const handleDeckList = async () => {
+      try {
+        const response = await axios.get("https://api-anki-inmetro.vercel.app/api/deck/get-deck", { headers: { Authorization: `Bearer ${token}` } });
+        const { decks: d } = response.data;
+        setDeckList(d);
+      } catch(err) {
+        console.error(err.response.statusText);
+        setMessage(err.response.statusText);
+      }
+    }
+    handleDeckList();
+  }, [token]);
+
+  useEffect(() => {
+  if (deckList.length > 0) {
+    setDeck(deckList[0].filename);
+  }
+}, [deckList]);
 
   useEffect(() => {
     if (selectedDeck) {
@@ -128,14 +157,16 @@ function ReadDeck({ decks, onDeleteCard, onUpdateCard }) {
   if (!selectedDeck) {
     return (
       <div className="container read-deck-container">
-        <select onChange={handleDeckChange}>
-          <option value="">Selecione um baralho</option>
-          {decks.map((deck, index) => (
-            <option key={index} value={deck.name}>
-              {deck.name}
-            </option>
-          ))}
-        </select>
+        <label>
+          Deck:
+          <select value={deck} onChange={(e) => { setDeck(e.target.value) }}>
+            {deckList.map((deck, index) => (
+              <option key={index} value={deck.filename}>
+                {deck.filename}
+              </option>
+            ))}
+          </select>
+        </label>
         <button onClick={() => navigate(-1)}>Voltar</button>
       </div>
     );

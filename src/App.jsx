@@ -117,6 +117,8 @@ function App() {
 
               <Route path="/import-apkg" element={<ImportApkgPage />} />
 
+              <Route path="/export-apkg" element={<ImportApkgPage />} />
+
             </Routes>
           </main>
             <Footer /> 
